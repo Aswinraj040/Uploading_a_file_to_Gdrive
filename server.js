@@ -5,20 +5,21 @@ const cors = require('cors');
 const { google } = require('googleapis');
 const path = require('path');
 
-// Google Drive setup
-const GOOGLE_CREDENTIALS = {
-  "type": "service_account",
-  "project_id": "rithostel",
-  "private_key_id": "d1a072a1d08a9e0ab5da9a3ac9be7e7eea30247a",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCdm8s9wM4TCmCK\nNLVOjQPDaZFsIKoTBkMTP0XC/KjcTJZw3TLgIsFpfyXJTKmiQZ5FHCKM9o7Pf1J8\n3ZxAKyCQ3VXzFUB3a//BpftO1KbeU0+1hinG6NVS2pKHRo9qOWHZ0g6igqCZr6dn\nL1PjgyL7KgLIrp7cFvhzYPx7rBy7q5hptRH2VB/7bW9zA8yo01VMJdi4Yy8oQaTY\nHCnsWOvf4nJBp+KndDoi+/inPHQdmkpSYSrkG3Y6yfckuWAl1fQ6vkH4BK/nFMYR\n3IsTUn3b4Z8KSWmLrTL5eoxOvyLn/tqPa6NHkI9rxLpCPLjY5IIFw0kRaakXPZUF\n0KjFxrPRAgMBAAECggEADBJAJUksn2m2ji9OSadkR+XAhRsVW6KppYI9mhsW5dSZ\n2ygd+uu+i5F49+t+vJYxBJMMlGZX9s2GKFki3AlRk7bYG+efSeZELvVDA70m0LVp\nz/noHjt8Bz4FZgYB+v1NIM1FYK4Hle3NsQn/b1f+aGVF1FAHi8zYl6GwhNpgUwFJ\nOdAXjcNYqpCrydZcv1M7Iz+DVfNEKT0EZPiWdzPXkalFEYJ6XTemEY3MBSJx2Xg/\nWRUNVOMojzpyFJUS8YCgMpKCxzqBfrx1YsGFiFjK4wGycxYLyEj/6jdX3xurjeDX\nTZ0Pjjwx4nXVQs0ed4tmCevo4y3RrKRNqcmensGXSQKBgQDTrrozdccvhavOHlPj\nq2qpN2qaHGM0aULVbTSyNQnEArjMEqeeRTIhSspk7MgOCW+t/RQWIREQ0gnMAt64\ncy0nYkw3aeqL6hyJMKIF7ks8f16IlaAtc2CP3PsrrY1Uxx6VWA6St1gyhV0e2/Xu\n7Jsf1IyAP2G8DXUWqfbkNNCtDQKBgQC+mu9gDWUpe9Vzm586euXuyp6ATPfw7Zns\nXH9NFv8/p9/w3EZf45Ig8X8/el+kYYe49BkdiYMKvCmmBJjcwrigNZ0lED4PN+dg\nL+cKxjNihbd30+5sqBUjRBy8o1wnQBgU8i//IaMTmoEFESLlU+b5AvvwXgS4aDZ8\nxesjb0OY1QKBgEGA+C2kbJbQDnIiAGObT849T8eQsUIusHfK61uZ/gOhs/2yaBwZ\n3YFf23GPs/hkAyMcBXMzmExUMqPm33TEb1yYlm0vYV0afOoXGowrSSzXXTF227I0\n2dSq1S6W7f0mANjF/vx3r9syWbaK6nec0APxiejFtEC1CV6SCcxka46hAoGAHzxc\nxizryySUEmIKchb532wtFXGHoGAPvYBbDFMceV4VgO9YSRaON//bjpeLXPDuwQyf\noQuMAhJb8O0H8AWpI/glTJGg2fWbYVP4VPeuLBMlwellRUE2VZUv8GoFDBmg2K3n\n17O3edr0EdSBF3vsehpXF0kRFPdfFouIwUHWnhECgYAjdHgBLRCZUFlT2xzMDyhs\n1mprgFe3BplqmqTtHhfGwyl4rcWuhJzQKOk30I3hIEUEQ/VcF3mlaqIOR+kqSt59\nwtZY/lTh90EWv8+giey/SJr3x2JhM0jqRwYK8ABOqDdwQ8eM8ev5VtYMsDsZY3rp\nOfOppNB7zNTDdGjzR/YRUA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "aswinsample@rithostel.iam.gserviceaccount.com",
-  "client_id": "100287944718738357982",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/aswinsample%40rithostel.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-};
+//Uncomment the below cred and add your credentials please
+/*
+const cred = {
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": "",
+  "universe_domain": ""
+};*/
 
 // Create uploads directory if not exists
 const uploadDir = './uploads';
@@ -46,7 +47,7 @@ const upload = multer({ storage });
 
 // Google Drive API client setup
 const auth = new google.auth.GoogleAuth({
-    credentials: GOOGLE_CREDENTIALS,
+    credentials: cred,
     scopes: ['https://www.googleapis.com/auth/drive.file']
 });
 const driveService = google.drive({ version: 'v3', auth });
